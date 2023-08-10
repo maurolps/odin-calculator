@@ -7,10 +7,37 @@ body {
   justify-content: center;
   background-color: #c0c0c0;
   width: 50%;
-  max-width: 300px;
+  max-width: 400px;
   padding: 10px;
+  padding-top: 40px;
   border-style: outset;
   border-color: rgb(240, 233, 233);
+}
+
+.head {
+  display: flex;
+  margin-top: -30px;
+  margin-bottom: 30px;
+  background-color: #000080;
+  padding: 4px;
+  border-radius: 3px;
+  gap: 5px;
+}
+
+.headText {
+  color: white;
+  flex: 1;
+}
+
+.headBtn {
+  background-color: #c0c0c0;
+  width: 15px;
+  text-align: center;
+  height: 15px;
+  border-width: thin;  
+  border-style: outset;
+  font-weight: bold;
+  
 }
 
 .calculator {
@@ -57,7 +84,7 @@ button {
 }
 
 .btnBrown {
-  color: brown;
+  color: #8d2626;
   font-weight: bold;
 }
 
@@ -67,7 +94,7 @@ button {
 }
 
 .btnBlue2 {
-  color: rgb(8, 8, 68);
+  color: 000080;
   font-weight: bold;
 }
 
