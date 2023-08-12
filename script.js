@@ -3,8 +3,10 @@ let secondNumber = undefined;
 let operator = "";
 let displayContent = "";
 let isOperator = false;
+let memoryNumber = 0;
 const display = document.getElementById('display');
 const btn = document.querySelectorAll("button");
+const memoryContainer = document.getElementById('mContainer');
 
 function operate(para1, para2, op) {
   let opResult = null;
@@ -99,6 +101,28 @@ function keyNumber(key) {
   updateDisplay(key);
 }
 
+function keyMemory(key) {
+
+  switch (key) {
+    case "MC":
+      memoryNumber = "";
+      break;
+    case "MR":
+      if (memoryNumber===0 || memoryNumber === ""){break;}
+      display.textContent = memoryNumber;
+      break;
+    case "MS":
+      memoryNumber = display.textContent;
+      break;
+    case "M+":
+      memoryNumer = parseInt(memoryNumber);
+      memoryNumber += parseInt(display.textContent);
+      break;
+  }
+  memoryContainer.textContent = memoryNumber;
+  
+}
+
 function buttonClick(para) {
   let opClass = para.target.className;
   const key = this.textContent;
@@ -115,6 +139,7 @@ function buttonClick(para) {
   if(opClass === "btnBlue"){keyNumber(key)}
   if(opClass === "btnBrown"){keyClear(key)}
   if(opClass === "btnRed"){keyPad(key)}
+  if(opClass === "btnMem"){keyMemory(key)}
 
 }
 
