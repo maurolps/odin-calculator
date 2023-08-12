@@ -6,12 +6,14 @@ body {
   display: flex;
   justify-content: center;
   background-color: #c0c0c0;
-  width: 50%;
-  max-width: 400px;
+  width: 80%;
+  max-width: 300px;
+  min-width: 220px;
   padding: 10px;
   padding-top: 40px;
   border-style: outset;
-  border-color: rgb(240, 233, 233);
+  border-color: rgb(247, 242, 242);
+  box-shadow: 4px 4px rgb(78, 78, 78);
 }
 
 .head {
@@ -54,6 +56,7 @@ body {
   justify-content: end;
   font-size: 16px;
   padding: 5px;
+  height: 20px;
 
 }
 
@@ -67,14 +70,50 @@ body {
 button {
   width: 15%;
   aspect-ratio: 1;
-  border-style: outset;
   border-color: rgb(240, 233, 233);
-  background-color: #c0c0c0;;
+  background-color: #c0c0c0;
+  box-shadow: 1px 1px black;
+}
+
+button:hover {
+  background-color: #c9c9c9;
+}
+
+button:active {
+  box-shadow: none;
+}
+
+.memory {
+  flex: 1;
+  display: flex;
+  color: #8d2626;
+  background-color: green;
+  margin-right: 10px;
+  min-width: 35px;
+}
+
+.square {
+  flex: 1;
+  display: flex;
+  aspect-ratio: 2/1;
+  margin-right: 63px;
+  background-color: #c0c0c0;
+  border-style: inset;
+  border-width: 2px;
+  border-color: rgb(216, 215, 215);
+  min-width: 30px;
+  
+}
+
+.memory button {
+  width: 100%;
+  font-weight: 500;
 }
 
 .btnBrown {
   aspect-ratio: 2/1;
   width: 20%;
+
 }
 
 .columns {
