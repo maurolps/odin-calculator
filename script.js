@@ -3,11 +3,10 @@ let secondNumber = undefined;
 let operator = "";
 let displayContent = "";
 let isOperator = false;
-
 const display = document.getElementById('display');
 const btn = document.querySelectorAll("button");
 
-function operate(para1, para2, op){
+function operate(para1, para2, op) {
   let opResult = null;
   para1 = parseFloat(para1);
   para2 = parseFloat(para2);
@@ -28,8 +27,10 @@ function operate(para1, para2, op){
     case "-":
       opResult = para1-para2;
     	break;
+    case "^":
+      opResult = para1**para2;
+      break;     
   }
-  console.log(para1+op+para2+"="+opResult);
   firstNumber = opResult;
   (Math.floor(opResult) !== opResult)?
   display.textContent = opResult.toFixed(2):
@@ -49,54 +50,71 @@ function updateDisplay(content) {
 
 }
 
+function keyPad(key) {
+  if (key === "⁺⁄₋") {
+    display.textContent = -display.textContent;
+    return;
+  }
+  isOperator = true;
+  if (key === "=") {
+    if(firstNumber === undefined){return};
+    secondNumber = display.textContent;
+    operate(firstNumber, secondNumber,operator);
+    firstNumber = undefined;
+    return;
+  }
+  if (firstNumber === undefined) {
+    firstNumber = display.textContent;
+    operator = key;
+  } else { 
+    secondNumber = display.textContent;
+    operate(firstNumber, secondNumber,operator);
+    operator = key;
+  }
+  
+}
+
+function keyClear(key) {
+  if (key === "Back") {
+    if (display.textContent === "0") {return};
+    display.textContent = display.textContent.slice(0,-1);
+    if (display.textContent === "") {display.textContent="0"};
+    return;
+  }
+  if (key === "CE") {
+    display.textContent = "0";
+    displayContent = "";
+    return;
+  }
+  firstNumber = undefined;
+  isOperator = false;
+  displayContent = "";
+  display.textContent = "0";
+}
+
+function keyNumber(key) {
+  if (key === ".") {
+    if (display.textContent.includes(".")) return;
+  }
+  updateDisplay(key);
+}
+
 function buttonClick(para) {
   let opClass = para.target.className;
+  const key = this.textContent;
 
-  if (opClass === "btnBlue") {
-    updateDisplay(this.textContent);
- 
+  if (opClass === "btnBlue2") {
+    if (key === "%") {
+      display.textContent = display.textContent/100;
+      return
+    }
+    if (key === ""){return};
+    opClass = "btnRed";
   }
-  if (opClass === "btnBrown") {
-    if (this.textContent === "Back") {
-      console.log(display.textContent);
-      if (display.textContent === "0") {return};
-      display.textContent = display.textContent.slice(0,-1);
-      if (display.textContent === "") {display.textContent="0"};
-      console.log(display.textContent);
-      return;
-    }
-    if (this.textContent === "CE") {
-      display.textContent = "0";
-      displayContent = "";
-      return;
-    }
-    firstNumber = undefined;
-    isOperator = false;
-    displayContent = "";
-    display.textContent = "0";
-  }
-  if (opClass === "btnRed") {
-    isOperator = true;
-    if (this.textContent === "=") {
-      if(firstNumber === undefined){return};
-      secondNumber = display.textContent;
-      operate(firstNumber, secondNumber,operator);
-      firstNumber = undefined;
-      return;
-    }
-    if (firstNumber === undefined) {
-      firstNumber = display.textContent;
-      operator = this.textContent;
-      console.log(firstNumber);
-    } else { 
-      secondNumber = display.textContent;
-      console.log(secondNumber);
-      operate(firstNumber, secondNumber,operator);
-      operator = this.textContent;
-    }
-    
 
-  }
+  if(opClass === "btnBlue"){keyNumber(key)}
+  if(opClass === "btnBrown"){keyClear(key)}
+  if(opClass === "btnRed"){keyPad(key)}
 
 }
 
