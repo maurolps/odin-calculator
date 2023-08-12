@@ -115,7 +115,8 @@ function keyMemory(key) {
       memoryNumber = display.textContent;
       break;
     case "M+":
-      memoryNumer = parseInt(memoryNumber);
+      if (memoryNumber === ""){memoryNumber=0;}
+      memoryNumber = parseInt(memoryNumber);
       memoryNumber += parseInt(display.textContent);
       break;
   }
